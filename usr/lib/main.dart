@@ -14,22 +14,31 @@ class MyApp extends StatelessWidget {
       title: 'Social Media App',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: Colors.deepPurple,
-          brightness: Brightness.light,
+        brightness: Brightness.dark,
+        scaffoldBackgroundColor: const Color(0xFF2D1F28), // Dark brownish/purple background base
+        colorScheme: const ColorScheme.dark(
+          primary: Color(0xFFD946EF), // Pink/Purple accent
+          secondary: Color(0xFFF97316), // Orange accent
+          surface: Color(0xFF4A3441), // Card background
+          onSurface: Colors.white,
         ),
         useMaterial3: true,
-        scaffoldBackgroundColor: Colors.white,
+        fontFamily: 'Roboto', // Default, but explicit
         appBarTheme: const AppBarTheme(
-          backgroundColor: Colors.white,
+          backgroundColor: Colors.transparent,
           elevation: 0,
           scrolledUnderElevation: 0,
-          iconTheme: IconThemeData(color: Colors.black),
+          iconTheme: IconThemeData(color: Colors.white),
           titleTextStyle: TextStyle(
-            color: Colors.black,
+            color: Colors.white,
             fontSize: 20,
             fontWeight: FontWeight.bold,
           ),
+        ),
+        bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+          backgroundColor: Color(0xFF1E151A),
+          selectedItemColor: Color(0xFFD946EF),
+          unselectedItemColor: Colors.grey,
         ),
       ),
       initialRoute: '/',

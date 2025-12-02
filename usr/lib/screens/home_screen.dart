@@ -7,28 +7,41 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          'SocialApp',
-          style: TextStyle(fontStyle: FontStyle.italic),
+    return Container(
+      decoration: const BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+          colors: [
+            Color(0xFF4A2C38),
+            Color(0xFF2D1F28),
+          ],
         ),
-        actions: [
-          IconButton(
-            onPressed: () {},
-            icon: const Icon(Icons.favorite_border),
-          ),
-          IconButton(
-            onPressed: () {},
-            icon: const Icon(Icons.send),
-          ),
-        ],
       ),
-      body: ListView.builder(
-        itemCount: mockPosts.length,
-        itemBuilder: (context, index) {
-          return PostCard(post: mockPosts[index]);
-        },
+      child: Scaffold(
+        backgroundColor: Colors.transparent,
+        appBar: AppBar(
+          title: const Text(
+            'SocialApp',
+            style: TextStyle(fontStyle: FontStyle.italic),
+          ),
+          actions: [
+            IconButton(
+              onPressed: () {},
+              icon: const Icon(Icons.favorite_border),
+            ),
+            IconButton(
+              onPressed: () {},
+              icon: const Icon(Icons.send),
+            ),
+          ],
+        ),
+        body: ListView.builder(
+          itemCount: mockPosts.length,
+          itemBuilder: (context, index) {
+            return PostCard(post: mockPosts[index]);
+          },
+        ),
       ),
     );
   }

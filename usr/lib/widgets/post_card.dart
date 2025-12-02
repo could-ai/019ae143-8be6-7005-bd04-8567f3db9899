@@ -8,121 +8,103 @@ class PostCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        // Header
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-          child: Row(
-            children: [
-              CircleAvatar(
-                radius: 18,
-                backgroundImage: NetworkImage(post.userAvatar),
-              ),
-              const SizedBox(width: 10),
-              Expanded(
-                child: Text(
-                  post.username,
-                  style: const TextStyle(
-                    fontWeight: FontWeight.bold,
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      decoration: BoxDecoration(
+        color: const Color(0xFF4A3441).withOpacity(0.6),
+        borderRadius: BorderRadius.circular(20),
+        border: Border.all(color: Colors.white.withOpacity(0.05)),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // Header
+          Padding(
+            padding: const EdgeInsets.all(12),
+            child: Row(
+              children: [
+                CircleAvatar(
+                  radius: 20,
+                  backgroundImage: NetworkImage(post.userAvatar),
+                ),
+                const SizedBox(width: 12),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        post.username,
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                          fontSize: 16,
+                        ),
+                      ),
+                      Text(
+                        post.timeAgo,
+                        style: TextStyle(
+                          color: Colors.white.withOpacity(0.5),
+                          fontSize: 12,
+                        ),
+                      ),
+                    ],
                   ),
                 ),
-              ),
-              IconButton(
-                icon: const Icon(Icons.more_vert),
-                onPressed: () {},
-              ),
-            ],
-          ),
-        ),
-        // Image
-        SizedBox(
-          height: 400,
-          width: double.infinity,
-          child: Image.network(
-            post.imageUrl,
-            fit: BoxFit.cover,
-            loadingBuilder: (context, child, loadingProgress) {
-              if (loadingProgress == null) return child;
-              return Center(
-                child: CircularProgressIndicator(
-                  value: loadingProgress.expectedTotalBytes != null
-                      ? loadingProgress.cumulativeBytesLoaded /
-                          loadingProgress.expectedTotalBytes!
-                      : null,
+                IconButton(
+                  icon: const Icon(Icons.more_horiz, color: Colors.white70),
+                  onPressed: () {},
                 ),
-              );
-            },
-            errorBuilder: (context, error, stackTrace) => Container(
-              color: Colors.grey[200],
-              child: const Icon(Icons.error),
+              ],
             ),
           ),
-        ),
-        // Actions
-        Row(
-          children: [
-            IconButton(
-              icon: const Icon(Icons.favorite_border),
-              onPressed: () {},
-            ),
-            IconButton(
-              icon: const Icon(Icons.chat_bubble_outline),
-              onPressed: () {},
-            ),
-            IconButton(
-              icon: const Icon(Icons.send),
-              onPressed: () {},
-            ),
-            const Spacer(),
-            IconButton(
-              icon: const Icon(Icons.bookmark_border),
-              onPressed: () {},
-            ),
-          ],
-        ),
-        // Likes & Caption
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                '${post.likes} likes',
-                style: const TextStyle(fontWeight: FontWeight.bold),
+          // Image
+          Container(
+            height: 300,
+            width: double.infinity,
+            margin: const EdgeInsets.symmetric(horizontal: 12),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(16),
+              image: DecorationImage(
+                image: NetworkImage(post.imageUrl),
+                fit: BoxFit.cover,
               ),
-              const SizedBox(height: 4),
-              RichText(
-                text: TextSpan(
-                  style: const TextStyle(color: Colors.black),
-                  children: [
-                    TextSpan(
-                      text: '${post.username} ',
-                      style: const TextStyle(fontWeight: FontWeight.bold),
-                    ),
-                    TextSpan(text: post.caption),
-                  ],
-                ),
-              ),
-              const SizedBox(height: 4),
-              Text(
-                'View all ${post.commentsCount} comments',
-                style: const TextStyle(color: Colors.grey),
-              ),
-              const SizedBox(height: 4),
-              Text(
-                post.timeAgo,
-                style: const TextStyle(
-                  color: Colors.grey,
-                  fontSize: 12,
-                ),
-              ),
-              const SizedBox(height: 16),
-            ],
+            ),
           ),
-        ),
-      ],
+          // Actions
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+            child: Row(
+              children: [
+                IconButton(
+                  icon: const Icon(Icons.favorite_border, color: Colors.white),
+                  onPressed: () {},
+                ),
+                Text('${post.likes}', style: const TextStyle(color: Colors.white)),
+                const SizedBox(width: 16),
+                IconButton(
+                  icon: const Icon(Icons.chat_bubble_outline, color: Colors.white),
+                  onPressed: () {},
+                ),
+                Text('${post.commentsCount}', style: const TextStyle(color: Colors.white)),
+                const Spacer(),
+                IconButton(
+                  icon: const Icon(Icons.bookmark_border, color: Colors.white),
+                  onPressed: () {},
+                ),
+              ],
+            ),
+          ),
+          // Caption
+          if (post.caption.isNotEmpty)
+            Padding(
+              padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
+              child: Text(
+                post.caption,
+                style: const TextStyle(color: Colors.white70),
+              ),
+            ),
+        ],
+      ),
     );
   }
 }

@@ -18,10 +18,46 @@ class Post {
   });
 }
 
+class UserProfile {
+  final String name;
+  final String username;
+  final String avatarUrl;
+  final String bio;
+  final String birthday;
+  final String location;
+  final String joinedDate;
+  final int postsCount;
+  final int friendsCount;
+
+  UserProfile({
+    required this.name,
+    required this.username,
+    required this.avatarUrl,
+    required this.bio,
+    required this.birthday,
+    required this.location,
+    required this.joinedDate,
+    required this.postsCount,
+    required this.friendsCount,
+  });
+}
+
+final UserProfile currentUser = UserProfile(
+  name: 'Alan karayshay',
+  username: 'alankarayshay',
+  avatarUrl: 'https://i.pravatar.cc/150?img=33', // Placeholder for the couple photo
+  bio: 'MORE JSEM CIGAN KUNDO',
+  birthday: 'Apr 2, 2006',
+  location: 'Hlinsko v Čechách',
+  joinedDate: 'Joined Nov 2025',
+  postsCount: 4,
+  friendsCount: 7,
+);
+
 final List<Post> mockPosts = [
   Post(
-    username: 'jessica_travels',
-    userAvatar: 'https://i.pravatar.cc/150?img=5',
+    username: 'Alan karayshay',
+    userAvatar: 'https://i.pravatar.cc/150?img=33',
     imageUrl: 'https://picsum.photos/id/1015/600/600',
     caption: 'Sunset vibes in the mountains! 🏔️✨ #travel #nature',
     likes: 1243,
